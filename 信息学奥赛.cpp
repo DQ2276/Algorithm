@@ -286,6 +286,27 @@ void T2034() {
 	for (int j = i - 1; j >= 0; j--)
 		cout << a[j] << " ";
 }
+//#include<limits.h/climits> INT_MAX
+//bool数组默认为1，但默认值！=1
 void T2036() {
+	int n, r = 1;
+	bool a[1000];
+	for (int i = 1; i < 1000; i++)  //bool数组默认为1，但默认值！=1
+		a[i] = 1;
+	cin >> n;
+	for(int i=2;i<=n;i++)
+		for(int j=1; j * i <=n;j++)
+			a[j * i]=!a[j * i];
+	/*
+	for(int i=1; i<=n; i++){
+        for(int j=i; j<=n; j++){
+            if(j%i==0) a[j]=!a[j];//逻辑取反
+        }
+    }
+	*/
+	for (int i = 1; i <= n; i++) {
+		if (a[i] == 1)
+			cout << i << " ";
+	}
 
 }
