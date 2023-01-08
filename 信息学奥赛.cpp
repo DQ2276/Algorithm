@@ -1,7 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
-#include <iomanip>
+#include<iostream>
+#include<iomanip>
 #include<math.h>
+#include<climits>
 //#include <cstdio>
 #include"Functions.h"
 #include"信息学奥赛.h"
@@ -308,5 +309,37 @@ void T2036() {
 		if (a[i] == 1)
 			cout << i << " ";
 	}
-
+}
+//memset(a,0,sizeof(a)):为所有数组里的元素赋值为0。
+//a[(j + M) % N ? (j + M) % N : N] = !a[(j + M) % N ? (j + M) % N : N];
+void T2037() { //****
+	int N, M, p = 0, count = 0, sum = 0;
+	bool a[INT16_MAX];
+	cin >> N >> M;
+	/*
+	for (int i = 1; i <= N; i++)
+		a[i] = 1;
+	*/
+	memset(a, 1, sizeof(a));
+	while (sum != N) {
+		p = ++p % N ? p % N : N;  //当p==N时p=N，p=1--N
+		if (a[p])
+			count++;
+		if (count == M) {
+			cout << p << " ";
+			count = 0;
+			a[p] = 0;
+			sum++;
+		}
+	}
+}
+void T2039() { //***** BubbleSort()
+	int a[20], n, j, k;
+	bool flag;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+		cin >> a[i];
+	BubbleSort(a,n);
+	for (int i = 0; i < n; i++)
+		cout << a[i] << endl;
 }

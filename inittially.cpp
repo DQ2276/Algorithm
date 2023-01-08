@@ -44,7 +44,9 @@ void Ssoier() {
 	//T2024();
 	//T2025();
 	//T2034();
-	T2036();
+	//T2036();
+	//T2037();
+	T2039();
 }
 void Test() {
 	float S;
@@ -65,4 +67,5 @@ return 0;
 */
 int main() {
 	Ssoier();	
+	//Test();
 }
