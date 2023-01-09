@@ -265,7 +265,7 @@ void T1105() {
 	for (int i = 0; i < n; i++)
 		cout << a[i] << " ";
 }
-//memset(a, 1, L+1);//¸³Öµ·¶Î§0~L-1
+//memset(a, 1, L);//¸³Öµ·¶Î§0~L-1
 void T1107() {
 	int L, M, l, r, count = 0;
 	bool a[10001];
