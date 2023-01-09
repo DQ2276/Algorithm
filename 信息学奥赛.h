@@ -25,9 +25,13 @@ void T1097();
 void T1098();
 void T1099();
 void T1100();
+void T1105();
+void T1107();
 void T2024();
 void T2025();
 void T2034();
 void T2036();
 void T2037();
 void T2039();
+void T2040();
+

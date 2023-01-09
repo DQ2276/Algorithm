@@ -4,6 +4,7 @@
 #include<math.h>
 #include<climits>
 //#include <cstdio>
+#include"TemplateFunction.hpp"
 #include"Functions.h"
 #include"信息学奥赛.h"
 
@@ -254,7 +255,33 @@ void T1100() {
 	*/
 			
 }
-
+//STL中可用reverse（）
+void T1105() {
+	int n, a[100];
+	cin >> n;
+	for (int i = 0; i < n; i++)
+		cin >> a[i];
+	Reverse<int>(a,n);
+	for (int i = 0; i < n; i++)
+		cout << a[i] << " ";
+}
+//memset(a, 1, L+1);//赋值范围0~L-1
+void T1107() {
+	int L, M, l, r, count = 0;
+	bool a[10001];
+	cin >> L >> M;
+	memset(a, 1, L+1);//赋值范围0~L-1
+	for (int i = 0; i < M; i++) {
+		cin >> l >> r;
+		for (int j = l; j <= r; j++)
+			if (a[j])
+				a[j] = !a[j];
+	}
+	for (int i = 0; i <= L; i++)
+		if (a[i])
+			count++;
+		cout << count;
+}
 void T2024() {
 	int n, sum = 1;
 	cin >> n;
@@ -342,4 +369,11 @@ void T2039() { //***** BubbleSort()
 	BubbleSort(a,n);
 	for (int i = 0; i < n; i++)
 		cout << a[i] << endl;
+}
+void T2040() {
+	int n;
+	cin >> n;
+	for (int i = 2; i <= n; i++)
+		if (IsPrime(i))
+			cout << i << endl;
 }
