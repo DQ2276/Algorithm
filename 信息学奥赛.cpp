@@ -282,6 +282,105 @@ void T1107() {
 			count++;
 		cout << count;
 }
+//以“，”为分隔符，处理最后的“，”
+void T1109() {
+	int N, M;
+	bool a[5001];
+	cin >> N >> M;
+	memset(a, 0, N + 1);
+	for (int i = 2; i <= M; i++)
+		for (int j = 1; j * i <= N; j++)
+			a[i * j] = !a[i * j];
+	for (int i = 1; i <= N; i++) {
+		if (!a[i]) {
+			if (!a[0]) {
+				cout << i;
+				a[0] = 1;
+			}
+			else
+				cout << "," << i;
+		}
+	}
+}
+//double的最大最小值不在limits.h中，用(numeric_limits<double>::min)()获取
+//注意不要最大最小值的情况，对“i != maxIndex && i != minIndex”与“a[i] != max && a[i] != min"的区别
+void T1114() {   //****
+	int n, maxIndex, minIndex;
+	double a[300], max = (numeric_limits<double>::min)(), min = INT16_MAX, average, avemax = INT16_MIN, sum = 0, avemaxabs;
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];
+		if (max < a[i]) {
+			max = a[i];
+			maxIndex = i;
+		}		
+		if (min > a[i]) {
+			min = a[i];
+			minIndex = i;
+		}		
+		sum += a[i];
+	}
+	average = (sum - max - min) / (n - 2);
+	//cout << "max: " << max << "min: " << min << "sum: " << sum << "average:" << average << endl;
+	for (int i = 0; i < n; i++)
+		if (i != maxIndex && i != minIndex && fabs(a[i] - average) > avemax)  //除去最大最小值
+			avemax = fabs(a[i] - average);
+	cout << fixed << setprecision(2) << average << " " << avemax;
+}
+//对多个数计数
+//数组赋初值新方法 a[10001] = { 0 }
+void T1115() {
+	int n, a[10001] = { 0 }, Fmax = INT16_MIN, x;
+	cin >> n;
+	//memset(a, 0, sizeof(a));
+	for (int i = 0; i < n; i++) {
+		cin >> x;
+		if (Fmax < x)
+			Fmax = x;
+		a[x]++;
+	}
+	for (int j = 0; j <= Fmax; j++)
+		cout << a[j] << endl;
+}
+void T1116() {
+	int a[INT16_MAX] = { 0 }, n, x, xmax = INT16_MIN, countmax = INT16_MIN, index;
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> x;
+		a[x]++;
+		if (xmax < x)
+			xmax = x;
+	}
+	for (int i = 0; i < xmax; i++) 
+		if (countmax < a[i]) {
+			countmax = a[i];
+			index = i;
+		}
+	cout << a[index];
+}
+//去重
+void T1117() {
+	bool a[5001] = { 0 };
+	int n, x;
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> x;
+		if (!a[x])
+			cout << x<<" ";
+		a[x] = 1;
+	}
+	/*
+	for(i=0;i<n;i++){
+		scanf("%d",&a[i]);
+		for(j=0;j<i;j++){
+			if(a[j]==a[i]){
+				i=i-1;
+				n=n-1;
+			}
+		}
+	}
+	*/
+}
 void T2024() {
 	int n, sum = 1;
 	cin >> n;

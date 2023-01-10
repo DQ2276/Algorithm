@@ -2,7 +2,7 @@
 #include<iomanip>
 #include"信息学奥赛.h"
 using namespace std;
-void QrecisionAndFormat() {  //精确度  #include<iomanip>
+void PrecisionAndFormatTest() {  //精确度  #include<iomanip>
 	float a = 0.213001;  //  C/C++保留n位小数输出
 	cout << "a=" << setiosflags(ios::fixed)<< setprecision(2) << a << endl;
 	printf("a=%0.2lf\n", a);
@@ -13,6 +13,13 @@ void QrecisionAndFormat() {  //精确度  #include<iomanip>
 	printf("%8d %8d %8d\n", a, b, c);
 	cout << setw(8) << a << " " << setw(8) << b << " " << setw(8) << c << endl;
 	*/
+}
+void DecimalTest() {
+	float S;
+	int w, l, h;
+	S = 150 / 15 * (15 + 25) * 1.0;
+	cout << setiosflags(ios::fixed) << setprecision(2) << S;
+	//printf("%0.2lf", S);
 }
 void Ssoier() {
 	//T2063();
@@ -42,7 +49,12 @@ void Ssoier() {
 	//T1099();
 	//T1100();
 	//T1105();
-	T1107();
+	//T1107();
+	//T1109();
+	//T1114();
+	//T1115();
+	T1116();
+	//T1117();
 	//T2024();
 	//T2025();
 	//T2034();
@@ -51,12 +63,10 @@ void Ssoier() {
 	//T2039();
 	//T2040();
 }
+
 void Test() {
-	float S;
-	int w, l, h;
-	S = 150 / 15 * (15 + 25) * 1.0;
-	cout << setiosflags(ios::fixed) << setprecision(2) << S;
-	//printf("%0.2lf", S);
+	//PrecisionAndFormatTest();
+	//DecimalTest();
 }
 /*
 * 答题模板
