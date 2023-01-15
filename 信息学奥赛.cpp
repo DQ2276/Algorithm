@@ -3,10 +3,12 @@
 #include<iomanip>
 #include<math.h>
 #include<climits>
+#include<string>
 //#include <cstdio>
 #include"TemplateFunction.hpp"
 #include"Functions.h"
 #include"信息学奥赛.h"
+
 
 
 using namespace std;
@@ -342,21 +344,35 @@ void T1115() {
 	for (int j = 0; j <= Fmax; j++)
 		cout << a[j] << endl;
 }
-void T1116() {
-	int a[INT16_MAX] = { 0 }, n, x, xmax = INT16_MIN, countmax = INT16_MIN, index;
+/*register 一般情况下，变量的值是存储在内存中的，CPU 每次使用数据都要从内存中读取。
+如果有一些变量使用非常频繁，从内存中读取就会消耗很多时间，为了解决这个问题，
+可以将使用频繁的变量放在CPU的通用寄存器中，这样使用该变量时就不必访问内存，直接从寄存器中读取，
+大大提高程序的运行效率。
+*/
+//else if()慎用  考虑并列if
+//数组最大长度0x7ffffff
+void T1116() {      //*****
+	int a[1000002] = { 0 }, n, count = 1, countmax = INT16_MIN;
 	cin >> n;
+	for (int i = 0; i < n; i++) 
+		cin >> a[i];
+	for (register int i = 1; i < n; i++) {
+		if (a[i] == a[i - 1])
+			count++;
+		else
+			count = 1;
+		if (count > countmax)  
+			countmax = count;
+	}
+	cout << countmax;
+	/*方法二   x较小时使用
 	for (int i = 0; i < n; i++) {
 		cin >> x;
 		a[x]++;
 		if (xmax < x)
 			xmax = x;
 	}
-	for (int i = 0; i < xmax; i++) 
-		if (countmax < a[i]) {
-			countmax = a[i];
-			index = i;
-		}
-	cout << a[index];
+	*/
 }
 //去重
 void T1117() {
@@ -380,6 +396,145 @@ void T1117() {
 		}
 	}
 	*/
+}
+//注意读题
+void T1118() {
+	int n, a[10000], b[10000], g[10000], k[10000], x, y, count = 0;
+	cin >> n;
+	for (int i = 0; i < n; i++) 
+		cin >> a[i] >> b[i] >> g[i] >> k[i];
+	cin >> x >> y;
+	for (int i = 0; i < n; i++)
+		if ((x >= a[i] && x <= a[i] + g[i]) && (y >= b[i] && y <= b[i] + k[i]))
+			count=i+1;
+	if (count!=0)
+		cout << count;
+	else
+		cout << -1;
+}
+void T1120() {
+	int n, i, j;
+	cin >> n >> i >> j;
+	for (int x = 1; x <= n; x++)
+		cout << "(" << i << "," << x << ")";
+	cout << endl;
+	for (int y = 1; y <= n; y++)
+		cout << "(" << y << "," << j << ")";
+	cout << endl;
+	for (int x = 1; x <= n; x++)
+		for (int y = 1; y <= n; y++)
+			if (y - x == j - i)
+				cout << "(" << x << "," << y << ")";
+	cout << endl;
+	for (int x = n; x >= 1; x--)
+		for (int y = 1; y <= n; y++)
+			if (x + y == i + j)
+				cout << "(" << x << "," << y << ")";
+}
+void T1122() {
+	int a[5][5], x[5], y[5], maxx = INT16_MIN, miny = INT16_MAX, j, k, r;
+	bool flag = 0;
+	for (int i = 0; i < 5; i++)
+		for (j = 0; j < 5; j++)
+			cin >> a[i][j];
+	for (int i = 0; i < 5; i++) {
+		maxx = 0;
+		for (j = 0; j < 5; j++)
+			if (a[i][j] > maxx) {
+				maxx = a[i][j];
+				r = j;
+			}
+				
+		for (k = 0; k < 5; k++)
+			if (a[k][r] < maxx)
+				break;
+		if (k == 5) {
+			cout << i+1 << " " << r+1 << " " << maxx;
+			flag = 1;
+		}
+	}
+	if (flag == 0)
+		cout << "not found";
+}
+void T1125() {
+	int n, m, k, A[100][100], B[100][100], C[100][100] = { 0 };
+	cin >> n >> m >> k;
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			cin >> A[i][j];
+	for (int i = 0; i < m; i++)
+		for (int j = 0; j < k; j++)
+			cin >> B[i][j];
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < k; j++)
+			for (int r = 0; r < m; r++)
+				C[i][j] += A[i][r] * B[r][j];
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < k; j++)
+			cout << C[i][j] << " ";
+			cout << endl;
+	}
+}
+void T1126() {
+	int n, m, A[100][100];
+	cin >> n >> m;
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			cin >> A[i][j];
+	/*
+	for(int i=0;i<n;i++)
+		for (int j = n; j < m; j++) 
+			swap(A[i][j], A[j][i]);
+			*/
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++)
+			cout << A[j][i] << " ";
+		cout << endl;
+	}
+}
+void T1127() {
+	int n, m, A[100][100];
+	cin >> n >> m;
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			cin >> A[i][j];
+	for (int i = 0; i < m; i++) {
+		for (int j = n - 1; j >= 0; j--)
+			cout << A[j][i] << " ";
+		cout << endl;
+	}	
+}
+/*
+* 四舍五入：
+1.round()
+2.(int)(num*1.0+0.5);利用数据类型的特点（double类转int时会舍去小数)进行四舍五入。
+double G[100][100];  //要四舍五入注意要用double
+*/
+void T1128() {
+	int n, m;
+	double G[100][100];  //要四舍五入注意要用double
+	cin >> n >> m;
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			cin >> G[i][j];
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++)
+			if (i == 0 || i == n - 1 || j == 0 || j == m - 1)
+				cout << G[i][j] << " ";
+			else 
+				cout << round((G[i][j] + G[i][j - 1] + G[i][j + 1] + G[i - 1][j] + G[i + 1][j]) / 5)<<" ";
+		cout << endl;
+	}
+}
+//cin >> ch; 以空格为结束符
+void T1129() {
+	string ch;
+	int count = 0;
+	getline(cin,ch);
+	for (int i = 0; i < ch.length(); i++)
+		if (ch[i] > '0' && ch[i] < '9')
+			count++;
+	cout << count;
 }
 void T2024() {
 	int n, sum = 1;
@@ -475,4 +630,65 @@ void T2040() {
 	for (int i = 2; i <= n; i++)
 		if (IsPrime(i))
 			cout << i << endl;
+}
+void T2042() {
+	int n, m, G[100][100];
+	cin >> n >> m;
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			cin >> G[i][j];
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			if (G[i][j])
+				cout << i+1 << " " << j+1 << " " << G[i][j] << endl;
+}
+void T2043() {
+	int n, a[20][20];
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		a[i][i] = 1;
+		a[i][0] = 1;
+	}
+	for (int i = 1; i < n; i++)
+		for (int j = 1; j < i; j++)
+			a[i][j] = a[i - 1][j - 1] + a[i - 1][j];
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j <= i; j++)
+			cout << a[i][j] << " ";
+		cout << endl;
+	}	
+}
+void T2044() {
+	char c[100];
+	int length;
+	cin >> c;
+	for (int i = 0; c[i] != '.'; i++)
+		length = i;
+	for (int i = 0, j = length; i != j&&i<j; i++, j--)
+		if (c[i] != c[j]) {
+			cout << "No";
+			return;
+		}
+	cout << "Yes";
+}
+void T2045() {
+	int n, count = 1, a[21][21] = { 0 };
+	cin >> n;
+	int x = 1, y = n;
+	while (count < n * n) {
+		while (x < n && a[x + 1][y] == 0)
+			a[x++][y] = count++;
+		while (y > 1 && a[x][y - 1] == 0)
+			a[x][y--] = count++;
+		while (x > 1 && a[x - 1][y] == 0)
+			a[x--][y] = count++;
+		while (y < n && a[x][y + 1] == 0)
+			a[x][y++] = count++;
+	}
+	a[x][y] = count;
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++)
+			cout << a[i][j] << " ";
+		cout << endl;
+	}
 }
