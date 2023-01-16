@@ -532,9 +532,73 @@ void T1129() {
 	int count = 0;
 	getline(cin,ch);
 	for (int i = 0; i < ch.length(); i++)
-		if (ch[i] > '0' && ch[i] < '9')
+		if (ch[i] >= '0' && ch[i] <= '9')
 			count++;
 	cout << count;
+}
+void T1130() {
+	string s;
+	int a[26] = { 0 };
+	bool flag = false;
+	cin >> s;
+	for (int i = 0; i < s.length(); i++)
+		a[s[i] - 'a']++;
+	for (int i = 0; i < s.length(); i++)
+		if (a[s[i] - 'a'] == 1) {
+			cout << s[i];
+			flag = true;
+			break;
+		}
+	if (!flag)
+		cout << "no";
+}
+void T1133() {
+	string s;
+	cin >> s;
+	for (int i = 0; i < s.length(); i++) {
+		cout << char(int(s[i] + s[(i + 1) % s.length()]));
+	}
+}
+//注意 倒序是否取等
+void T1137() {
+	string s;
+	char temp;
+	cin >> s;
+	for (int i = 0; i < s.size(); i++) {
+		if (s[i] >= 'a' && s[i] <= 'w' || s[i] >= 'A' && s[i] <= 'W')
+			s[i] += 3;
+		else //if (s[i] > 'w' && s[i] <= 'z' || s[i] > 'W' && s[i] <= 'Z')
+			s[i] -= 23;
+	}
+	for (int i = 0; i < s.length() / 2; i++) { //注意 倒序是否取等
+		temp = s[i];
+		s[i] = s[s.length() - i - 1];
+		s[s.length() - i - 1] = temp;
+	}
+	for (int i = 0; i < s.size(); i++)
+		if (s[i] >= 'a' && s[i] <= 'z')
+			s[i] -= 32;
+		else //if (s[i] >= 'A' && s[i] <= 'Z')
+			s[i] += 32;
+	cout << s;
+}
+void T1138() {
+	string s;
+	getline(cin, s);//注意字符串中cin的使用
+	for (int i = 0; i < s.length(); i++)
+		cout << (char)toupper(s[i]);
+}
+void T1139() {
+	string s;
+	int n;
+	cin >> n;
+	for (int j = 0; j < n; j++) {
+		cin >> s;
+		s[0] = (char)toupper(s[0]);
+		for (int i = 1; i < s.length(); i++)
+			s[i] = (char)tolower(s[i]);
+		cout << s << endl;
+	}
 }
 void T2024() {
 	int n, sum = 1;
