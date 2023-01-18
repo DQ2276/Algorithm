@@ -21,6 +21,12 @@ void DecimalTest() {
 	cout << setiosflags(ios::fixed) << setprecision(2) << S;
 	//printf("%0.2lf", S);
 }
+void StringText() {
+	string s;
+	cin >> s;
+	s.substr(0, s.length() - 2);
+	cout << s;
+}
 void Ssoier() {
 	//T2063();
 	//T1002();
@@ -66,7 +72,13 @@ void Ssoier() {
 	//T1133();
 	//T1137();
 	//T1138();
-	T1139();
+	//T1139();
+	//T1140();
+	//T1141();
+	//T1143();
+	//T1145();
+	//T1147();
+	//T1148();
 	//T2024();
 	//T2025();
 	//T2034();
@@ -78,11 +90,16 @@ void Ssoier() {
 	//T2043();
 	//T2044();
 	//T2045();
+	//T2047();
+	//T2048();
+	//T2049();
+	T2050();
 }
 
 void Test() {
 	//PrecisionAndFormatTest();
 	//DecimalTest();
+	StringText();
 }
 /*
 * ´ðÌâÄ£°å

@@ -9,8 +9,6 @@
 #include"Functions.h"
 #include"信息学奥赛.h"
 
-
-
 using namespace std;
 void T2063() {
 	cout << (15 * 20 - 10 * 20) / (20 - 10);
@@ -600,6 +598,102 @@ void T1139() {
 		cout << s << endl;
 	}
 }
+void T1140() {
+	string s1, s2;
+	cin >> s1 >> s2;
+	if (s1.find(s2) != -1)
+		cout << s2 << " is substring of " << s1;
+	else if (s2.find(s1) != -1)
+		cout << s1 << " is substring of " << s2;
+	else
+		cout << "No substring";
+}
+void T1141() {
+	string s;
+	cin >> s;
+	if ((s[s.length() - 2] == 'e' && s[s.length() - 1] == 'r' || s[s.length() - 2] == 'l' && s[s.length() - 1] == 'y') && s.length() != 2) {
+		cout << s.substr(0, s.length() - 2);
+		return;
+	}
+	if (s.length() > 2)
+	if ((s[s.length() - 3] == 'i' && s[s.length() - 2] == 'n' && s[s.length() - 1] == 'g') && s.length() != 3) {
+		cout << s.substr(0, s.length() - 3);
+		return;
+	}
+		cout << s;
+}
+void T1143() {
+	string s, smax, smin;
+	int max=INT16_MIN, min=INT16_MAX;
+	getline(cin, s);
+	for (int i = 0, j = 0; i < s.length(); i++) {
+		if (s[i] == ' ' || s[i] == ',') {
+			if (max < j) {
+				max = j;
+				smax = s.substr(i - j, max);
+			}
+			if (j != 0 && min > j) {
+				min = j;
+				smin = s.substr(i - j, min);
+			}
+			j = 0;
+		}
+		else
+			j++;
+	}
+	cout << smax << endl << smin;
+}
+void T1145() {
+	string s;
+	int i, count = 1;
+	cin >> s;
+	for (i = 0; i < s.length()-1; i++) {
+		if (s[i] != s[i + 1]) {
+			cout << count << s[i];
+			count = 1;
+		}
+		else
+			count++;
+	}
+	cout << count << s[i];
+}
+void T1147() {
+	int n, soc, max = INT16_MIN, min = INT16_MAX;
+	string s, smax, smin;
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> soc >> s;
+		if (soc > max) {
+			max = soc;
+			smax = s;
+		}
+		if (soc < min) {
+			min = soc;
+			smin = s;
+		}
+	}
+	cout << smax;
+}
+void T1148() {
+	int k, count = 1, i;
+	string s;
+	cin >> k >> s;
+	for (i = 0; i < s.length() - 1; i++) {
+		if (s[i] != s[i + 1]) {
+			if (count >= k) {
+				cout << s[i];
+				return;
+			}
+			count = 1;
+		}
+		else
+			count++;
+	}
+	if (count >= k)
+		cout << s[i];
+	else
+		cout << "No";
+}
 void T2024() {
 	int n, sum = 1;
 	cin >> n;
@@ -755,4 +849,71 @@ void T2045() {
 			cout << a[i][j] << " ";
 		cout << endl;
 	}
+}
+void T2047() {
+	string s;
+	while (cin >> s)
+		cout << s << " ";
+}
+void T2048() {
+	int n, j;
+	string s[20], temp;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+		cin >> s[i];
+	for (int i = 1; i < n; i++) {
+		if (s[i].compare(s[i - 1]) < 0) {
+			temp = s[i];
+			for (j = i - 1; j >= 0 && s[j].compare(temp) > 0; j--)  //注意j=-1，&&的应用
+				s[j + 1] = s[j];
+			s[j + 1] = temp;
+		}
+	}
+	for (int i = 0; i < n; i++)
+		cout << s[i] << endl;
+}
+//continue;的应用
+void T2049() {
+	string s1, s2;
+	int i = 0, j = 0;
+	getline(cin, s1);
+	getline(cin, s2);
+	while (i < s1.length() || j < s2.length()) {
+		if (s1[i] == ' ') {
+			i++;
+			continue;  //continue;的应用
+		}
+		if (s2[j] == ' ') {
+			j++;
+			continue;
+		}
+		if (toupper(s1[i]) == toupper(s2[j])) {
+			i++;
+			j++;
+		}
+		else {
+			cout << "NO";
+			return ;
+		}	
+	}
+	cout << "YES";
+}
+//''与“”的返回值不一样
+void T2050() {
+	string s1, s2;
+	cin >> s1 >> s2;
+	if (s1.length() < s2.length())
+		swap(s1, s2);
+	for (int i = 0, j = 0; i < s1.length() + s2.length(); i++) {  //注意i的范围，当s1=s2时
+		if (s1[i % s1.length()] == s2[j]) {
+			j++;
+			if (j == s2.length() - 1) {
+				cout << "true";
+				return;
+			}
+		}
+		else
+			j = 0;
+	}
+	cout << "false";
 }
